@@ -3,21 +3,21 @@
         LOGIN
     </x-slot:title>
     <div class="container d-flex flex-column">
-        <div class="row">
-            <div class="col-sm-10 col-md-8 col-lg-6 col-xl-5 mx-auto d-table h-100">
+        <div class="row" style="margin-top: 10em">
+            <div class="col-md-6">
+                <div class="text-center mt-4">
+                    @if($settings->logo)
+                        <img src="{{ asset('storage/settings/' . $settings->logo) }}" class="img-fluid" style="width: 400px">
+                    @else
+                        <h1 class="h2">Welcome back!</h1>
+                        <p class="lead">
+                            Sign in to your account to continue
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 mx-auto d-table h-100">
                 <div class="d-table-cell align-middle">
-
-                    <div class="text-center mt-4">
-                        @if($settings->logo)
-                            <img src="{{ asset('storage/settings/' . $settings->logo) }}" class="img-fluid" style="width: 200px">
-                        @else
-                            <h1 class="h2">Welcome back!</h1>
-                            <p class="lead">
-                                Sign in to your account to continue
-                            </p>
-                        @endif
-                    </div>
-
                     <div class="card">
                         <div class="card-body">
                             <div class="m-sm-3">
@@ -70,14 +70,14 @@
                                         @endif
 
                                         <button type="submit" class="btn btn-primary float-end">
-                                            {{ __('Login') }}
+                                            Masuk
                                         </button>
                                     </div>
                                 </form>
 
                                 <div class="flex items-center justify-end mt-4">
                                     @if (Route::has('register'))
-                                        {{ __("Don't have an account ?") }}
+                                        Belum punya akun ?
                                         <a href="{{ route('register') }}">
                                             {{ __('Register') }}
                                         </a>

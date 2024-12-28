@@ -31,7 +31,7 @@ class AuthenticatedSessionController extends Controller
         // Save activity
         activity()->performedOn(Auth::user())->causedBy(Auth::user())->log('Login');
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        return redirect()->intended(route('cms.dashboard', absolute: false));
     }
 
     /**
