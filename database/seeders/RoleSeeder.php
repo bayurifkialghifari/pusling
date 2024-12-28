@@ -32,14 +32,28 @@ class RoleSeeder extends Seeder
         'password.update',
         'logout',
     ];
-    public $routeUser = [
+    public $routeDefault = [
         'cms.dashboard',
     ];
+    public $routeLaporan = [
+        'cms.dashboard',
+    ];
+    public $routePetugas = [
+        'cms.dashboard',
+    ];
+    public $routeUser = [
+        'cms.dashboard',
+        'cms.user.permohonan'
+    ];
+
 
     public function run(): void
     {
         $admin = Role::findOrCreate('admin', 'web');
-        $user = Role::findOrCreate('default', 'web');
+        $laporan = Role::findOrCreate('laporan', 'web');
+        $petugas = Role::findOrCreate('petugas', 'web');
+        $user = Role::findOrCreate('user', 'web');
+        $default = Role::findOrCreate('default', 'web');
 
         // Generate Permission
         // Get all route names
@@ -56,7 +70,22 @@ class RoleSeeder extends Seeder
                     // Give admin permission
                     $admin->givePermissionTo($permission);
 
-                    // Give pegawai permission
+                    // Give default permission
+                    if(in_array($route, $this->routeDefault)) {
+                        $default->givePermissionTo($permission);
+                    }
+
+                    // Give laporan permission
+                    if(in_array($route, $this->routeLaporan)) {
+                        $laporan->givePermissionTo($permission);
+                    }
+
+                    // Give petugas permission
+                    if(in_array($route, $this->routePetugas)) {
+                        $petugas->givePermissionTo($permission);
+                    }
+
+                    // Give user permission
                     if(in_array($route, $this->routeUser)) {
                         $user->givePermissionTo($permission);
                     }
