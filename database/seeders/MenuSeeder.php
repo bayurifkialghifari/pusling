@@ -29,6 +29,14 @@ class MenuSeeder extends Seeder
             'route' => 'cms.user.permohonan',
             'ordering' => '2',
         ]);
+        $inbox = Menu::create([
+            'name' => 'Inbox',
+            'on' => 'cms',
+            'type' => 'item',
+            'icon' => 'fa fa-inbox',
+            'route' => 'cms.user.inbox',
+            'ordering' => '3',
+        ]);
 
         // Website Setting
         $admin = Menu::create([

@@ -41,7 +41,14 @@
                                     @if($menu->type != 'header')
                                         <i class="{{ $menu->icon }}"></i>
                                     @endif
-                                    <span class="align-middle">{{ $menu->name }}</span>
+                                    <span class="align-middle">
+                                        {{ $menu->name }}
+                                        @if($menu->name == 'Inbox')
+                                            <span class="badge bg-primary ms-auto">
+                                                {{ auth()->user()->unreadNotifications->count() }}
+                                            </span>
+                                        @endif
+                                    </span>
                                 </a>
 
                                 {{-- Check if has child --}}

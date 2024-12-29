@@ -43,7 +43,8 @@ class RoleSeeder extends Seeder
     ];
     public $routeUser = [
         'cms.dashboard',
-        'cms.user.permohonan'
+        'cms.user.permohonan',
+        'cms.user.inbox',
     ];
 
 

@@ -4,8 +4,10 @@ namespace App\Livewire\Forms\Cms\User;
 
 use App\Livewire\Contracts\FormCrudInterface;
 use App\Models\Permohonan;
+use App\Models\User;
 use App\Traits\WithGenerateReference;
 use App\Traits\WithMediaCollection;
+use Illuminate\Support\Facades\Notification;
 use Livewire\Attributes\Validate;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Livewire\Form;
@@ -96,6 +98,13 @@ class FormPermohonan extends Form implements FormCrudInterface
                 collection: 'document',
             );
         }
+
+        // Send notification to user it self
+        auth()->user()->notify(new \App\Notifications\Permohonan\Created($model->toArray()));
+        // And user with role petugas
+        Notification::send(User::whereHas('roles', function($query) {
+            $query->where('name', 'petugas');
+        })->get(), new \App\Notifications\Permohonan\Created($model->toArray()));
     }
 
     // Update data
