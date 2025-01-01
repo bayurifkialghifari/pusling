@@ -20,6 +20,15 @@ class MenuSeeder extends Seeder
             'route' => 'cms.dashboard',
             'ordering' => '1',
         ]);
+        // Admin Permohonan
+        $verificator = Menu::create([
+            'name' => 'Data Permohonan',
+            'on' => 'cms',
+            'type' => 'item',
+            'icon' => 'fa fa-file',
+            'route' => 'cms.admin.permohonan',
+            'ordering' => '2',
+        ]);
         // User Pemohonan
         $pemohon = Menu::create([
             'name' => 'Pemohonan',

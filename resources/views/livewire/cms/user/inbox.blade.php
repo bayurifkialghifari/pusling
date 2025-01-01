@@ -29,6 +29,11 @@
                                                 Permohonan Baru
                                             </a>
                                             @break
+                                        @case(\App\Notifications\Permohonan\Approved::class)
+                                            <a href="{{ route('cms.user.permohonan') }}">
+                                                Permohonan Disetujui
+                                            </a>
+                                            @break
                                         @default
                                     @endswitch
                                 </td>

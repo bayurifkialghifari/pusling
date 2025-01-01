@@ -37,13 +37,5 @@ class UserSeeder extends Seeder
         ]);
 
         $petugas->assignRole('petugas');
-
-        $laporan = User::create([
-            'name' => 'Laporan',
-            'email' => 'laporan@laporan.com',
-            'password' => bcrypt('password'),
-        ]);
-
-        $laporan->assignRole('laporan');
     }
 }

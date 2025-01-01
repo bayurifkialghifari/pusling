@@ -31,11 +31,10 @@ class RoleSeeder extends Seeder
         'password.confirm',
         'password.update',
         'logout',
+        'cms.user.permohonan',
+        'cms.user.inbox',
     ];
     public $routeDefault = [
-        'cms.dashboard',
-    ];
-    public $routeLaporan = [
         'cms.dashboard',
     ];
     public $routePetugas = [
@@ -51,7 +50,6 @@ class RoleSeeder extends Seeder
     public function run(): void
     {
         $admin = Role::findOrCreate('admin', 'web');
-        $laporan = Role::findOrCreate('laporan', 'web');
         $petugas = Role::findOrCreate('petugas', 'web');
         $user = Role::findOrCreate('user', 'web');
         $default = Role::findOrCreate('default', 'web');
@@ -74,11 +72,6 @@ class RoleSeeder extends Seeder
                     // Give default permission
                     if(in_array($route, $this->routeDefault)) {
                         $default->givePermissionTo($permission);
-                    }
-
-                    // Give laporan permission
-                    if(in_array($route, $this->routeLaporan)) {
-                        $laporan->givePermissionTo($permission);
                     }
 
                     // Give petugas permission

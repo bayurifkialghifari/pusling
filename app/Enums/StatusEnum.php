@@ -8,9 +8,9 @@ enum StatusEnum : int
     case APPROVED = 1;
     case REJECTED = -1;
 
-    public static function getDescription(int $status): string
+    public function label(): string
     {
-        return match ($status) {
+        return match ($this) {
             self::PENDING => 'Pending',
             self::APPROVED => 'Approved',
             self::REJECTED => 'Rejected',

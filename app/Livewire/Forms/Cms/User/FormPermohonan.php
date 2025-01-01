@@ -7,6 +7,7 @@ use App\Models\Permohonan;
 use App\Models\User;
 use App\Traits\WithGenerateReference;
 use App\Traits\WithMediaCollection;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Notification;
 use Livewire\Attributes\Validate;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
@@ -66,7 +67,7 @@ class FormPermohonan extends Form implements FormCrudInterface
         $this->email = $data->email;
         $this->whatsapp = $data->whatsapp;
         $this->permohonan_at = $data->permohonan_at;
-        $this->kunjungan_at = $data->kunjungan_at;
+        $this->kunjungan_at = Carbon::parse($data->kunjungan_at)->format('Y-m-d');
     }
 
     // Save the data
@@ -103,7 +104,7 @@ class FormPermohonan extends Form implements FormCrudInterface
         auth()->user()->notify(new \App\Notifications\Permohonan\Created($model->toArray()));
         // And user with role petugas
         Notification::send(User::whereHas('roles', function($query) {
-            $query->where('name', 'petugas');
+            $query->where('name', 'admin');
         })->get(), new \App\Notifications\Permohonan\Created($model->toArray()));
     }
 

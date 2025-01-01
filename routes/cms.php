@@ -10,6 +10,9 @@ Route::group([
 
     Route::get('/', App\Livewire\Dashboard::class)->name('dashboard');
 
+    // Admin Permohonan
+    Route::get('/admin-permohonan', App\Livewire\Cms\Admin\Permohonan::class)->name('admin.permohonan');
+
     // User Permohonan
     Route::get('/user-permohonan', App\Livewire\Cms\User\Permohonan::class)->name('user.permohonan');
     Route::get('/inbox', App\Livewire\Cms\User\Inbox::class)->name('user.inbox');
