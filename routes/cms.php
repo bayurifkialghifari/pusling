@@ -12,6 +12,7 @@ Route::group([
 
     // Admin Permohonan
     Route::get('/admin-permohonan', App\Livewire\Cms\Admin\Permohonan::class)->name('admin.permohonan');
+    Route::get('/admin-jadwal', App\Livewire\Cms\Admin\Jadwal::class)->name('admin.jadwal');
 
     // User Permohonan
     Route::get('/user-permohonan', App\Livewire\Cms\User\Permohonan::class)->name('user.permohonan');

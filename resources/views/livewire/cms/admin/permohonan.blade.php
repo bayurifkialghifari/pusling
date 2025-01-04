@@ -9,7 +9,7 @@
         </div>
         <div class="card-body">
             <x-acc-header :$originRoute :isCreate="false">
-                <div class="row">
+                <div class="row mt-5">
                     <div class="col-md-12">
                         <div class="list-group list-group-horizontal mb-2" x-data="{status: $wire.entangle('status').live}">
                             <button class="list-group-item"

@@ -29,6 +29,15 @@ class MenuSeeder extends Seeder
             'route' => 'cms.admin.permohonan',
             'ordering' => '2',
         ]);
+        // Admin Jadwal
+        $jadwal = Menu::create([
+            'name' => 'Data Jadwal',
+            'on' => 'cms',
+            'type' => 'item',
+            'icon' => 'fa fa-calendar',
+            'route' => 'cms.admin.jadwal',
+            'ordering' => '3',
+        ]);
         // User Pemohonan
         $pemohon = Menu::create([
             'name' => 'Pemohonan',
