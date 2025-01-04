@@ -46,6 +46,7 @@
                                 <td>{{ $d->location }}</td>
                                 <td>{{ $d->permohonan_at }}</td>
                                 <td>{{ $d->jadwal }}</td>
+                                <td>{{ $d->petugas }}</td>
                                 <td>
                                     @switch($d->status)
                                         @case(\App\Enums\StatusEnum::PENDING->value)

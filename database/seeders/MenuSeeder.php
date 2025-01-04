@@ -20,6 +20,12 @@ class MenuSeeder extends Seeder
             'route' => 'cms.dashboard',
             'ordering' => '1',
         ]);
+
+        $this->adminMenu();
+        $this->userMenu();
+    }
+
+    public function adminMenu() {
         // Admin Permohonan
         $verificator = Menu::create([
             'name' => 'Data Permohonan',
@@ -38,24 +44,15 @@ class MenuSeeder extends Seeder
             'route' => 'cms.admin.jadwal',
             'ordering' => '3',
         ]);
-        // User Pemohonan
-        $pemohon = Menu::create([
-            'name' => 'Pemohonan',
+        // Admin Petugas
+        $jadwal = Menu::create([
+            'name' => 'Data Petugas',
             'on' => 'cms',
             'type' => 'item',
-            'icon' => 'fa fa-file',
-            'route' => 'cms.user.permohonan',
-            'ordering' => '2',
+            'icon' => 'fa fa-users',
+            'route' => 'cms.admin.petugas',
+            'ordering' => '4',
         ]);
-        $inbox = Menu::create([
-            'name' => 'Inbox',
-            'on' => 'cms',
-            'type' => 'item',
-            'icon' => 'fa fa-inbox',
-            'route' => 'cms.user.inbox',
-            'ordering' => '3',
-        ]);
-
         // Website Setting
         $admin = Menu::create([
             'name' => 'Management',
@@ -95,6 +92,26 @@ class MenuSeeder extends Seeder
             'icon' => '#',
             'route' => 'cms.management.access-control',
             'ordering' => '5',
+        ]);
+    }
+
+    public function userMenu() {
+        // User Pemohonan
+        $pemohon = Menu::create([
+            'name' => 'Pemohonan',
+            'on' => 'cms',
+            'type' => 'item',
+            'icon' => 'fa fa-file',
+            'route' => 'cms.user.permohonan',
+            'ordering' => '2',
+        ]);
+        $inbox = Menu::create([
+            'name' => 'Inbox',
+            'on' => 'cms',
+            'type' => 'item',
+            'icon' => 'fa fa-inbox',
+            'route' => 'cms.user.inbox',
+            'ordering' => '3',
         ]);
     }
 }

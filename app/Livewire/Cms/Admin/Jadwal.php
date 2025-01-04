@@ -33,6 +33,10 @@ class Jadwal extends BaseComponent
                 'field' => 'jadwals.jadwal',
             ],
             [
+                'name' => 'Petugas',
+                'field' => 'petugas.name',
+            ],
+            [
                 'name' => 'Status',
                 'field' => 'jadwals.status',
             ],
@@ -48,8 +52,10 @@ class Jadwal extends BaseComponent
     public function render()
     {
         $model = JadwalModel::join('permohonans', 'jadwals.permohonan_id', '=', 'permohonans.id')
+            ->join('users as petugas', 'jadwals.petugas_id', '=', 'petugas.id')
             ->select(
                 'jadwals.*',
+                'petugas.name as petugas',
                 'permohonans.institusi',
                 'permohonans.institusi_address',
                 'permohonans.permohonan_at'
