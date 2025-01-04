@@ -6,8 +6,8 @@
         <div class="row" style="margin-top: 10em">
             <div class="col-md-6">
                 <div class="text-center mt-4">
-                    @if($settings->logo)
-                        <img src="{{ asset('storage/settings/' . $settings->logo) }}" class="img-fluid" style="width: 400px">
+                    @if($settings->getFirstMediaUrl('logo') != '')
+                        <img src="{{ $settings->getFirstMediaUrl('logo') }}" class="img-fluid" style="width: 400px">
                     @else
                         <h1 class="h2">Welcome back!</h1>
                         <p class="lead">
