@@ -16,4 +16,16 @@ class Jadwal extends Model
         'location',
         'status',
     ];
+
+    public function permohonan() {
+        return $this->belongsTo(Permohonan::class);
+    }
+
+    public function petugas() {
+        return $this->belongsTo(User::class);
+    }
+
+    public function laporan() {
+        return $this->hasOne(Laporan::class);
+    }
 }

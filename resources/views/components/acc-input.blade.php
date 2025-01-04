@@ -7,6 +7,7 @@
     'class' => 'form-control',
     'placeholder' => 'Input',
     'rows' => 5,
+    'disabled' => false,
 ])
 
 @if($type == 'select')
@@ -18,6 +19,7 @@
         @else
             wire:model="{{ $model }}"
         @endif
+        @if($disabled) disabled @endif
         class="{{ $class }} @error($model) is-invalid @enderror" {!! $attributes !!}>
 
         {{ $slot }}
@@ -35,6 +37,7 @@
         @else
             wire:model="{{ $model }}"
         @endif
+        @if($disabled) disabled @endif
         class="{{ $class }} @error($model) is-invalid @enderror"
         placeholder="{{ $placeholder }}"
         rows="{{ $rows }}" {!! $attributes !!}></textarea>
@@ -50,6 +53,7 @@
         @else
             wire:model="{{ $model }}"
         @endif
+        @if($disabled) disabled @endif
         type="{{ $type }}"
         class="{{ $class }} @error($model) is-invalid @enderror"
         placeholder="{{ $placeholder }}" {!! $attributes !!} />

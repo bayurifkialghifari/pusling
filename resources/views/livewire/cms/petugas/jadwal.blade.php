@@ -46,7 +46,6 @@
                                 <td>{{ $d->location }}</td>
                                 <td>{{ $d->permohonan_at }}</td>
                                 <td>{{ $d->jadwal }}</td>
-                                <td>{{ $d->petugas }}</td>
                                 <td>
                                     @switch($d->status)
                                         @case(\App\Enums\StatusKunjunganEnum::PENDING->value)
@@ -61,12 +60,21 @@
                                     @endswitch
                                 </td>
                                 <td>
-                                    <a class="btn btn-info btn-sm" href="{{ route('cms.petugas.laporan.show', [
-                                        'id' => Crypt::encryptString($d->id),
-                                    ]) }}" wire:navigate>
-                                        <i class="fa fa-eye"></i>
-                                        Lihat Laporan
-                                    </a>
+                                    @if($d->laporan)
+                                        <a class="btn btn-info btn-sm" href="{{ route('cms.petugas.laporan.show', [
+                                            'id' => Crypt::encryptString($d->id),
+                                        ]) }}" wire:navigate>
+                                            <i class="fa fa-eye"></i>
+                                            Lihat Laporan
+                                        </a>
+                                    @else
+                                        <a class="btn btn-primary btn-sm" href="{{ route('cms.petugas.laporan', [
+                                            'id' => Crypt::encryptString($d->id),
+                                        ]) }}" wire:navigate>
+                                            <i class="fa fa-file-text"></i>
+                                            Buat Laporan
+                                        </a>
+                                    @endif
                                 </td>
                             </tr>
                         @empty

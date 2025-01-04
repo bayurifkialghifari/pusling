@@ -10,49 +10,44 @@ use Spatie\Permission\Models\Role;
 
 class RoleSeeder extends Seeder
 {
-    public $permissionType = [
-        'view',
-        'create',
-        'update',
-        'delete',
-    ];
+    public $permissionType = ["view", "create", "update", "delete"];
     public $routeExcept = [
-        'sanctum.csrf-cookie',
-        'livewire.update',
-        'livewire.upload-file',
-        'livewire.preview-file',
-        'ignition.healthCheck',
-        'ignition.executeSolution',
-        'ignition.updateConfig',
-        'profile.edit',
-        'profile.update',
-        'profile.destroy',
-        'login',
-        'password.confirm',
-        'password.update',
-        'logout',
-        'cms.user.permohonan',
-        'cms.user.inbox',
+        "sanctum.csrf-cookie",
+        "livewire.update",
+        "livewire.upload-file",
+        "livewire.preview-file",
+        "ignition.healthCheck",
+        "ignition.executeSolution",
+        "ignition.updateConfig",
+        "profile.edit",
+        "profile.update",
+        "profile.destroy",
+        "login",
+        "password.confirm",
+        "password.update",
+        "logout",
+        "cms.user.permohonan",
+        "cms.user.inbox",
     ];
-    public $routeDefault = [
-        'cms.dashboard',
-    ];
+    public $routeDefault = ["cms.dashboard"];
     public $routePetugas = [
-        'cms.dashboard',
+        "cms.dashboard",
+        "cms.petugas.jadwal",
+        "cms.petugas.laporan",
+        "cms.petugas.laporan.show",
     ];
     public $routeUser = [
-        'cms.dashboard',
-        'cms.user.permohonan',
-        'cms.user.inbox',
+        "cms.dashboard",
+        "cms.user.permohonan",
+        "cms.user.inbox",
     ];
-
 
     public function run(): void
     {
-        $admin = Role::findOrCreate('admin', 'web');
-        $petugas = Role::findOrCreate('petugas', 'web');
-        $user = Role::findOrCreate('user', 'web');
-        $default = Role::findOrCreate('default', 'web');
+        $admin = Role::findOrCreate("admin", "web");
+        $petugas = Role::findOrCreate("petugas", "web");
+        $user = Role::findOrCreate("user", "web");
+        $default = Role::findOrCreate("default", "web");
 
         // Generate Permission
         // Get all route names
@@ -61,26 +56,26 @@ class RoleSeeder extends Seeder
         foreach ($routes as $value) {
             $route = $value->getName();
             // Except route
-            if(!in_array($route, $this->routeExcept) && !is_null($route)) {
-                foreach($this->permissionType as $type) {
-                    $permission = $type . '.' . $route;
-                    $permission = Permission::findOrCreate($permission, 'web');
+            if (!in_array($route, $this->routeExcept) && !is_null($route)) {
+                foreach ($this->permissionType as $type) {
+                    $permission = $type . "." . $route;
+                    $permission = Permission::findOrCreate($permission, "web");
 
                     // Give admin permission
                     $admin->givePermissionTo($permission);
 
                     // Give default permission
-                    if(in_array($route, $this->routeDefault)) {
+                    if (in_array($route, $this->routeDefault)) {
                         $default->givePermissionTo($permission);
                     }
 
                     // Give petugas permission
-                    if(in_array($route, $this->routePetugas)) {
+                    if (in_array($route, $this->routePetugas)) {
                         $petugas->givePermissionTo($permission);
                     }
 
                     // Give user permission
-                    if(in_array($route, $this->routeUser)) {
+                    if (in_array($route, $this->routeUser)) {
                         $user->givePermissionTo($permission);
                     }
                 }

@@ -15,6 +15,11 @@ Route::group([
     Route::get('/admin-jadwal', App\Livewire\Cms\Admin\Jadwal::class)->name('admin.jadwal');
     Route::get('/admin-petugas', App\Livewire\Cms\Admin\Petugas::class)->name('admin.petugas');
 
+    // Petugas Jadwal
+    Route::get('/petugas-jadwal', App\Livewire\Cms\Petugas\Jadwal::class)->name('petugas.jadwal');
+    Route::get('/petugas-laporan/{id}', App\Livewire\Cms\Petugas\JadwalLaporan::class)->name('petugas.laporan');
+    Route::get('/petugas-laporan/show/{id}', App\Livewire\Cms\Petugas\JadwalLaporan::class)->name('petugas.laporan.show');
+
     // User Permohonan
     Route::get('/user-permohonan', App\Livewire\Cms\User\Permohonan::class)->name('user.permohonan');
     Route::get('/inbox', App\Livewire\Cms\User\Inbox::class)->name('user.inbox');
