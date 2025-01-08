@@ -103,7 +103,7 @@
                         </button>
                         <button class="btn btn-danger btn-sm"
                             type="button"
-                            wire:click="reject({{ $form?->id }})">
+                            wire:click="confirmReject({{ $form?->id }})">
                             <i class="fa fa-trash"></i> Reject
                         </button>
                     </div>

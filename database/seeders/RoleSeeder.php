@@ -28,6 +28,7 @@ class RoleSeeder extends Seeder
         "logout",
         "cms.user.permohonan",
         "cms.user.inbox",
+        "cms.petugas.jadwal",
     ];
     public $routeDefault = ["cms.dashboard"];
     public $routePetugas = [

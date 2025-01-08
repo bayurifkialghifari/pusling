@@ -9,6 +9,7 @@ use App\Models\Permohonan as PermohonanModel;
 use App\Models\User;
 use BaseComponent;
 use Illuminate\Support\Facades\Notification;
+use Livewire\Attributes\On;
 
 class Permohonan extends BaseComponent
 {
@@ -90,6 +91,26 @@ class Permohonan extends BaseComponent
 
         $this->closeModal();
         $this->openModal('approveModal');
+    }
+
+    public function confirmReject($id) {
+        $this->dispatch('confirm', function: 'reject', id: $id);
+    }
+
+    #[On('reject')]
+    public function reject($id) {
+        // Set status permohonan to approved
+        $permohonan = PermohonanModel::find($id)->first();
+
+        // Send Notification
+        Notification::send(User::find($permohonan->user_id), new \App\Notifications\Permohonan\Rejected($permohonan->toArray()));
+
+        $permohonan->update([
+            'status' => StatusEnum::REJECTED->value,
+        ]);
+
+        session()->flash('success', 'Permohonan berhasil ditolak');
+        $this->closeModal();
     }
 
     public function closeApproveModal() {

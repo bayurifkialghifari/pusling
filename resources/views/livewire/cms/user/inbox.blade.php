@@ -26,12 +26,17 @@
                                     @switch($d->type)
                                         @case(\App\Notifications\Permohonan\Created::class)
                                             <a href="{{ route('cms.user.permohonan') }}">
-                                                Permohonan Baru
+                                                <span class="badge bg-warning">Permohonan Baru</span>
                                             </a>
                                             @break
                                         @case(\App\Notifications\Permohonan\Approved::class)
                                             <a href="{{ route('cms.user.permohonan') }}">
-                                                Permohonan Disetujui
+                                                <span class="badge bg-success">Permohonan Disetujui</span>
+                                            </a>
+                                            @break
+                                        @case(\App\Notifications\Permohonan\Rejected::class)
+                                            <a href="{{ route('cms.user.permohonan') }}">
+                                                <span class="badge bg-danger">Permohonan Ditolak</span>
                                             </a>
                                             @break
                                         @default
