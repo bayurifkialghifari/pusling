@@ -100,7 +100,7 @@ class Permohonan extends BaseComponent
     #[On('reject')]
     public function reject($id) {
         // Set status permohonan to approved
-        $permohonan = PermohonanModel::find($id)->first();
+        $permohonan = PermohonanModel::where('id', $id)->first();
 
         // Send Notification
         Notification::send(User::find($permohonan->user_id), new \App\Notifications\Permohonan\Rejected($permohonan->toArray()));
@@ -119,7 +119,7 @@ class Permohonan extends BaseComponent
 
     public function saveJadwal() {
         // Set status permohonan to approved
-        $permohonan = PermohonanModel::find($this->formJadwal->permohonan_id)->first();
+        $permohonan = PermohonanModel::where('id', $this->formJadwal->permohonan_id)->first();
 
         // Send Notification
         Notification::send(User::find($permohonan->user_id), new \App\Notifications\Permohonan\Approved($permohonan->toArray()));

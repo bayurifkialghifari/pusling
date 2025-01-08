@@ -98,12 +98,12 @@
                     <div class="text-center">
                         <button class="btn btn-success btn-sm"
                             type="button"
-                            wire:click="approve({{ $form?->id }})">
+                            wire:click="approve({{ $form?->old_data?->id }})">
                             <i class="fa fa-edit"></i> Approve
                         </button>
                         <button class="btn btn-danger btn-sm"
                             type="button"
-                            wire:click="confirmReject({{ $form?->id }})">
+                            wire:click="confirmReject({{ $form?->old_data?->id }})">
                             <i class="fa fa-trash"></i> Reject
                         </button>
                     </div>
