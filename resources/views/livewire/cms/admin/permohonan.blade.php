@@ -192,12 +192,6 @@
                     <x-acc-input type="date" model="formJadwal.jadwal" />
                 </div>
             </div>
-            <div class="col-md-12">
-                <div class="mb-3">
-                    <label class="form-label">Lokasi</label>
-                    <x-acc-input type="text" model="formJadwal.location" placeholder="Lokasi" />
-                </div>
-            </div>
         </x-acc-form>
     </x-acc-modal>
 </x-acc-with-alert>

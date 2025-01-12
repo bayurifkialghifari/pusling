@@ -87,7 +87,6 @@ class Permohonan extends BaseComponent
     public function approve($id) {
         $this->formJadwal->permohonan_id = $id;
         $this->formJadwal->jadwal = null;
-        $this->formJadwal->location = null;
 
         $this->closeModal();
         $this->openModal('approveModal');
@@ -120,6 +119,7 @@ class Permohonan extends BaseComponent
     public function saveJadwal() {
         // Set status permohonan to approved
         $permohonan = PermohonanModel::where('id', $this->formJadwal->permohonan_id)->first();
+        $this->formJadwal->location = $permohonan->institusi_address;
 
         // Send Notification
         Notification::send(User::find($permohonan->user_id), new \App\Notifications\Permohonan\Approved($permohonan->toArray()));

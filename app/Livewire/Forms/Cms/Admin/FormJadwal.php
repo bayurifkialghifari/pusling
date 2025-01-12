@@ -15,7 +15,7 @@ class FormJadwal extends Form implements FormCrudInterface
     #[Validate('required')]
     public $permohonan_id;
 
-    #[Validate('nullable')]
+    #[Validate('required')]
     public $petugas_id;
 
     #[Validate('required')]
