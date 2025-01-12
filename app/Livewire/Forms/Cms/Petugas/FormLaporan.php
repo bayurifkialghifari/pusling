@@ -33,8 +33,8 @@ class FormLaporan extends Form implements FormCrudInterface
     #[Validate('required')]
     public $kendala;
 
-    #[Validate('nullable|image:jpeg,png,jpg,svg')]
-    public $foto_kegiatan;
+    // #[Validate(['foto_kegiatan.*' => 'nullable|image:jpeg,png,jpg,svg|max:2048'])]
+    public $foto_kegiatan = [];
 
     public $old_data;
 
@@ -49,6 +49,7 @@ class FormLaporan extends Form implements FormCrudInterface
         $this->jumlah_pengunjung_perempuan = $data->jumlah_pengunjung_perempuan;
         $this->masukan = $data->masukan;
         $this->kendala = $data->kendala;
+        $this->foto_kegiatan = [];
     }
 
     // Save the data
@@ -75,10 +76,13 @@ class FormLaporan extends Form implements FormCrudInterface
         $this->setStatusJadwalDone($model->jadwal_id);
 
         // Save foto
-        if($this->foto_kegiatan instanceof TemporaryUploadedFile) {
+        $model->clearMediaCollection('images');
+
+        foreach($this->foto_kegiatan as $file) {
             $this->saveFile(
                 model: $model,
-                file: $this->foto_kegiatan,
+                file: $file,
+                deleteOlderMedia: false,
             );
         }
     }
@@ -88,10 +92,13 @@ class FormLaporan extends Form implements FormCrudInterface
         $model = Laporan::find($this->id);
 
         // Save foto
-        if($this->foto_kegiatan instanceof TemporaryUploadedFile) {
+        $model->clearMediaCollection('images');
+
+        foreach($this->foto_kegiatan as $file) {
             $this->saveFile(
                 model: $model,
-                file: $this->foto_kegiatan,
+                file: $file,
+                deleteOlderMedia: false,
             );
         }
 

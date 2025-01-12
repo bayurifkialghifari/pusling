@@ -1,4 +1,13 @@
 <x-acc-with-alert>
+    <style>
+        .btn-warning {
+            background-color: #ffc107 !important;
+        }
+
+        .btn-success {
+            background-color: #28a745 !important;
+        }
+    </style>
     <h1 class="h3 mb-3">
         {{ $title ?? '' }}
     </h1>
@@ -65,12 +74,20 @@
                         <div class="col-md-12">
                             <div class="mb-3">
                                 <label class="form-label">Foto Kegiatan</label>
-                                <x-acc-image-preview
-                                    :image="$form->foto_kegiatan"
-                                    :form_image="$form->old_data?->getFirstMediaUrl('images')"  />
                                 @if($originRoute != 'cms.petugas.laporan.show')
-                                    <x-acc-input-file  model="form.foto_kegiatan" />
-                                    <x-acc-input-error for="form.foto_kegiatan" />
+                                    <livewire:dropzone
+                                        wire:model="form.foto_kegiatan"
+                                        :rules="['image','mimes:png,jpeg','max:10420']"
+                                        :multiple="true" />
+                                    <x-acc-input-error for="form.foto_kegiatan.*" />
+                                @else
+                                    <div class="row">
+                                    @foreach ($form->old_data->getMedia('images') as $image)
+                                        <div class="col-md-3 border">
+                                            <img src="{{ $image->getUrl() }}" alt="Foto Kegiatan" class="img-fluid mb-3" width="100%">
+                                        </div>
+                                    @endforeach
+                                    </div>
                                 @endif
                             </div>
                         </div>
