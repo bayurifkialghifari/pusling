@@ -1,13 +1,4 @@
 <x-acc-with-alert>
-    <style>
-        .btn-warning {
-            background-color: #ffc107 !important;
-        }
-
-        .btn-success {
-            background-color: #28a745 !important;
-        }
-    </style>
     <h1 class="h3 mb-3">
         {{ $title ?? '' }}
     </h1>
