@@ -4,6 +4,7 @@ namespace App\Livewire\Forms\Cms\Admin;
 
 use App\Livewire\Contracts\FormCrudInterface;
 use App\Models\Jadwal;
+use Carbon\Carbon;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
@@ -26,6 +27,9 @@ class FormJadwal extends Form implements FormCrudInterface
 
     #[Validate('required')]
     public $location;
+
+    #[Validate('required')]
+    public $week;
 
     // Get the data
     public function getDetail($id) {
@@ -54,12 +58,33 @@ class FormJadwal extends Form implements FormCrudInterface
 
     // Store data
     public function store() {
-        Jadwal::create($this->all());
+        // Foreac week
+        for ($i = 0; $i < (int)$this->week; $i++) {
+            $this->jadwal = Carbon::parse($this->jadwal)->addWeeks(1);
+            Jadwal::create([
+                'permohonan_id' => $this->permohonan_id,
+                'petugas_id' => $this->petugas_id,
+                'petugas_2_id' => $this->petugas_2_id,
+                'jadwal' => $this->jadwal,
+                'location' => $this->location,
+            ]);
+        }
     }
 
     // Update data
     public function update() {
-        Jadwal::find($this->id)->update($this->all());
+        Jadwal::where('permohonan_id', $this->permohonan_id)->delete();
+        // Foreac week
+        for ($i = 0; $i < (int)$this->week; $i++) {
+            $this->jadwal = Carbon::parse($this->jadwal)->addWeeks(1);
+            Jadwal::create([
+                'permohonan_id' => $this->permohonan_id,
+                'petugas_id' => $this->petugas_id,
+                'petugas_2_id' => $this->petugas_2_id,
+                'jadwal' => $this->jadwal,
+                'location' => $this->location,
+            ]);
+        }
     }
 
     // Delete data

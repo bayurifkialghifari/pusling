@@ -62,7 +62,7 @@
                                     @endswitch
                                 </td>
                                 <td>
-                                    <a href="{{ $d->getFirstMediaUrl('document') }}"
+                                    <a href="{{ $d?->getFirstMediaUrl('document') }}"
                                         class="btn btn-primary btn-sm"
                                         target="_blank">
                                         <i class="fa fa-file"></i>
@@ -202,6 +202,10 @@
                     <label class="form-label">Tanggal</label>
                     <x-acc-input type="date" model="formJadwal.jadwal" />
                 </div>
+            </div>
+            <div class="col-md-12">
+                <label class="form-label">Berapa Minggu</label>
+                <x-acc-input type="number" model="formJadwal.week" />
             </div>
         </x-acc-form>
     </x-acc-modal>
