@@ -188,6 +188,17 @@
             </div>
             <div class="col-md-12">
                 <div class="mb-3">
+                    <label class="form-label">Petugas 2</label>
+                    <x-acc-input type="select" model="formJadwal.petugas_2_id">
+                        <option value="">Pilih Petugas</option>
+                        @foreach($petugas as $p)
+                            <option value="{{ $p->id }}">{{ $p->name }}</option>
+                        @endforeach
+                    </x-acc-input>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="mb-3">
                     <label class="form-label">Tanggal</label>
                     <x-acc-input type="date" model="formJadwal.jadwal" />
                 </div>

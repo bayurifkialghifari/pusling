@@ -19,6 +19,9 @@ class FormJadwal extends Form implements FormCrudInterface
     public $petugas_id;
 
     #[Validate('required')]
+    public $petugas_2_id;
+
+    #[Validate('required')]
     public $jadwal;
 
     #[Validate('required')]
@@ -31,6 +34,7 @@ class FormJadwal extends Form implements FormCrudInterface
         $this->id = $id;
         $this->permohonan_id = $data->permohonan_id;
         $this->petugas_id = $data->petugas_id;
+        $this->petugas_2_id = $data->petugas_2_id;
         $this->jadwal = $data->jadwal;
         $this->location = $data->location;
     }

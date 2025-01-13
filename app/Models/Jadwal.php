@@ -12,6 +12,7 @@ class Jadwal extends Model
     protected $fillable = [
         'permohonan_id',
         'petugas_id',
+        'petugas_2_id',
         'jadwal',
         'location',
         'status',
@@ -22,7 +23,11 @@ class Jadwal extends Model
     }
 
     public function petugas() {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'petugas_id');
+    }
+
+    public function petugas2() {
+        return $this->belongsTo(User::class, 'petugas_2_id');
     }
 
     public function laporan() {

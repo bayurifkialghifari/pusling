@@ -64,6 +64,7 @@ class Jadwal extends BaseComponent
         );
 
         $model = $model->where("petugas_id", auth()->user()->id);
+        $model = $model->orWhere("petugas_2_id", auth()->user()->id);
 
         if ($this->status != "all") {
             $model = $model->where("jadwals.status", $this->status);
