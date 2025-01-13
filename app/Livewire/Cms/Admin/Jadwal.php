@@ -4,6 +4,7 @@ namespace App\Livewire\Cms\Admin;
 
 use App\Livewire\Forms\Cms\Admin\FormJadwal;
 use App\Models\Jadwal as JadwalModel;
+use App\Models\User;
 use BaseComponent;
 
 class Jadwal extends BaseComponent
@@ -37,6 +38,10 @@ class Jadwal extends BaseComponent
                 'field' => 'petugas.name',
             ],
             [
+                'name' => 'Petugas 2',
+                'field' => 'petugas_2.name',
+            ],
+            [
                 'name' => 'Status',
                 'field' => 'jadwals.status',
             ],
@@ -48,14 +53,23 @@ class Jadwal extends BaseComponent
         $order = 'desc';
 
     public $status = 'all';
+    public $petugas = [];
+
+    public function mount() {
+        $this->petugas = User::whereHas('roles', function ($q) {
+            $q->where('name', 'petugas');
+        })->get();
+    }
 
     public function render()
     {
         $model = JadwalModel::join('permohonans', 'jadwals.permohonan_id', '=', 'permohonans.id')
             ->join('users as petugas', 'jadwals.petugas_id', '=', 'petugas.id')
+            ->leftJoin('users as petugas_2', 'jadwals.petugas_2_id', '=', 'petugas_2.id')
             ->select(
                 'jadwals.*',
                 'petugas.name as petugas',
+                'petugas_2.name as petugas_2',
                 'permohonans.institusi',
                 'permohonans.institusi_address',
                 'permohonans.permohonan_at'

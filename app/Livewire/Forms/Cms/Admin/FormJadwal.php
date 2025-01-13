@@ -28,7 +28,7 @@ class FormJadwal extends Form implements FormCrudInterface
     #[Validate('required')]
     public $location;
 
-    #[Validate('required')]
+    #[Validate('nullable')]
     public $week;
 
     // Get the data
@@ -73,18 +73,7 @@ class FormJadwal extends Form implements FormCrudInterface
 
     // Update data
     public function update() {
-        Jadwal::where('permohonan_id', $this->permohonan_id)->delete();
-        // Foreac week
-        for ($i = 0; $i < (int)$this->week; $i++) {
-            $this->jadwal = Carbon::parse($this->jadwal)->addWeeks(1);
-            Jadwal::create([
-                'permohonan_id' => $this->permohonan_id,
-                'petugas_id' => $this->petugas_id,
-                'petugas_2_id' => $this->petugas_2_id,
-                'jadwal' => $this->jadwal,
-                'location' => $this->location,
-            ]);
-        }
+        Jadwal::find($this->id)->update($this->all());
     }
 
     // Delete data

@@ -47,6 +47,7 @@
                                 <td>{{ $d->permohonan_at }}</td>
                                 <td>{{ $d->jadwal }}</td>
                                 <td>{{ $d->petugas }}</td>
+                                <td>{{ $d->petugas_2 }}</td>
                                 <td>
                                     @switch($d->status)
                                         @case(\App\Enums\StatusKunjunganEnum::PENDING->value)
@@ -61,6 +62,11 @@
                                     @endswitch
                                 </td>
                                 <td>
+                                    @if($d->status == \App\Enums\StatusKunjunganEnum::PENDING->value)
+                                        <button class="btn btn-primary btn-sm" wire:click="edit({{ $d->id }})">
+                                            <i class="fa fa-edit"></i>
+                                        </button>
+                                    @endif
                                     <a class="btn btn-info btn-sm" href="{{ route('cms.petugas.laporan.show', [
                                         'id' => Crypt::encryptString($d->id),
                                     ]) }}" wire:navigate>
@@ -84,4 +90,32 @@
             </div>
         </div>
     </div>
+
+    {{-- Create / Update Modal --}}
+    <x-acc-modal title="{{ $isUpdate ? 'Update' : 'Create' }} {{ $title }}" :isModaOpen="$modals['defaultModal']">
+        <x-acc-form submit="save">
+            <div class="col-md-12">
+                <div class="mb-3">
+                    <label class="form-label">Petugas</label>
+                    <x-acc-input type="select" model="form.petugas_id">
+                        <option value="">Pilih Petugas</option>
+                        @foreach($petugas as $p)
+                            <option value="{{ $p->id }}">{{ $p->name }}</option>
+                        @endforeach
+                    </x-acc-input>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="mb-3">
+                    <label class="form-label">Petugas 2</label>
+                    <x-acc-input type="select" model="form.petugas_2_id">
+                        <option value="">Pilih Petugas</option>
+                        @foreach($petugas as $p)
+                            <option value="{{ $p->id }}">{{ $p->name }}</option>
+                        @endforeach
+                    </x-acc-input>
+                </div>
+            </div>
+        </x-acc-form>
+    </x-acc-modal>
 </x-acc-with-alert>
