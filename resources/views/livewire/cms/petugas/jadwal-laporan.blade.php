@@ -16,7 +16,13 @@
                         <div class="col-md-12">
                             <div class="mb-3">
                                 <label class="form-label">Nama Petugas</label>
-                                <input type="text" class="form-control" disabled value="{{ $jadwal->petugas->name }}">
+                                <input type="text" class="form-control" disabled value="{{ $jadwal->petugas?->name }}">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <label class="form-label">Nama Petugas 2</label>
+                                <input type="text" class="form-control" disabled value="{{ $jadwal->petugas2?->name }}">
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -65,7 +71,7 @@
                         <div class="col-md-12">
                             <div class="mb-3">
                                 <label class="form-label">Foto Kegiatan</label>
-                                @if($originRoute != 'cms.petugas.laporan.show')
+                                @if($originRoute != 'cms.petugas.laporan.show' && $originRoute != 'cms.laporan.export-pdf')
                                     <livewire:dropzone
                                         wire:model="form.foto_kegiatan"
                                         :rules="['image','mimes:png,jpeg','max:10420']"
@@ -73,16 +79,18 @@
                                     <x-acc-input-error for="form.foto_kegiatan.*" />
                                 @else
                                     <div class="row">
-                                    @foreach ($form->old_data->getMedia('images') as $image)
-                                        <div class="col-md-3 border">
-                                            <img src="{{ $image->getUrl() }}" alt="Foto Kegiatan" class="img-fluid mb-3" width="100%">
-                                        </div>
-                                    @endforeach
+                                        @if($form->old_data?->getMedia('images'))
+                                            @foreach ($form->old_data?->getMedia('images') as $image)
+                                                <div class="col-md-3 border">
+                                                    <img src="{{ $image->getUrl() }}" alt="Foto Kegiatan" class="img-fluid mb-3" width="100%">
+                                                </div>
+                                            @endforeach
+                                        @endif
                                     </div>
                                 @endif
                             </div>
                         </div>
-                        @if($originRoute == 'cms.petugas.laporan.show')
+                        @if($originRoute == 'cms.petugas.laporan.show' || $originRoute == 'cms.laporan.export-pdf')
                             <x-slot:actions></x-slot:actions>
                         @endif
                     </x-acc-form>

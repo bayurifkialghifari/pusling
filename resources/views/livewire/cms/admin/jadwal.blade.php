@@ -73,6 +73,14 @@
                                         <i class="fa fa-eye"></i>
                                         Lihat Laporan
                                     </a>
+                                    @if($d->status == \App\Enums\StatusKunjunganEnum::DONE->value)
+                                        <a class="btn btn-danger btn-sm" href="{{ route('cms.laporan.export-pdf', [
+                                            'id' => Crypt::encryptString($d->id),
+                                        ]) }}" target="_blank">
+                                            <i class="fa fa-file"></i>
+                                            Export Pdf
+                                        </a>
+                                    @endif
                                 </td>
                             </tr>
                         @empty

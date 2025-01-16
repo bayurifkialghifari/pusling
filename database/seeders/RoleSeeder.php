@@ -36,6 +36,7 @@ class RoleSeeder extends Seeder
         "cms.petugas.jadwal",
         "cms.petugas.laporan",
         "cms.petugas.laporan.show",
+        'cms.laporan.export-pdf',
     ];
     public $routeUser = [
         "cms.dashboard",

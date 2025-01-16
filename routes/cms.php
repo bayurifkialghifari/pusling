@@ -45,6 +45,11 @@ Route::group([
     Route::get('/management/setting-privacy-policy', App\Livewire\Cms\Management\Setting\PrivacyPolicy::class)->name('management.privacy-policy-setting');
     Route::get('/management/setting-terms-of-service', App\Livewire\Cms\Management\Setting\TermOfService::class)->name('management.term-of-service-setting');
 
+    // Export pdf laporan
+    Route::get('/laporan/export-pdf/{id}', function($id) {
+        return view('exports.laporan-pdf', compact('id'));
+    })->name('laporan.export-pdf');
+
     // Logs
     Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index'])->name('logs');
 });

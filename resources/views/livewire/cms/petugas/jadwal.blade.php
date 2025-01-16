@@ -67,6 +67,7 @@
                                             <i class="fa fa-eye"></i>
                                             Lihat Laporan
                                         </a>
+                                        <a href=""></a>
                                     @else
                                         <a class="btn btn-primary btn-sm" href="{{ route('cms.petugas.laporan', [
                                             'id' => Crypt::encryptString($d->id),
