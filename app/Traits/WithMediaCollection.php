@@ -15,10 +15,12 @@ trait WithMediaCollection {
         }
 
         // Handle Dropzone
-        if(isset($file['path'])) {
-            // Move the file to the storage
-            $file = Storage::putFileAs('public/dropzones', new File($file['path']), uniqid() . '.' . $file['extension']);
-            $file = storage_path('app/' . $file);
+        if(is_array($file)) {
+            if(isset($file['path'])) {
+                // Move the file to the storage
+                $file = Storage::putFileAs('public/dropzones', new File($file['path']), uniqid() . '.' . $file['extension']);
+                $file = storage_path('app/' . $file);
+            }
         }
 
         $model->addMedia($file)->toMediaCollection($collection);
