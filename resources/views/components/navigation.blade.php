@@ -34,7 +34,7 @@
                                         aria-expanded="{{ $isActive ? 'true' : 'false' }}"
                                     @else
                                         href="{{ \Illuminate\Support\Facades\Route::has($menu->route) ? route($menu->route) : '#' }}"
-                                        wire:navigate
+                                        {{-- wire:navigate --}}
                                     @endif>
 
                                     {{-- Icon --}}

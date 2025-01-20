@@ -38,6 +38,7 @@
 
     <x-javascript />
     {{ $scripts ?? '' }}
+    @livewireCalendarScripts
 </body>
 
 </html>
