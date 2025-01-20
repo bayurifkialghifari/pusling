@@ -4,7 +4,7 @@
             <i class="hamburger align-self-center"></i>
         </a>
 
-        <div class="navbar-collapse collapse">
+        <div class="navbar-collapse">
             <ul class="navbar-nav navbar-align">
                 {{-- <li class="nav-item dropdown">
                     <a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-bs-toggle="dropdown">
