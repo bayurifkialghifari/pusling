@@ -8,7 +8,7 @@ Route::group([
     'middleware' => ['auth', 'validate-role-permission'],
 ], function () {
 
-    Route::get('/', App\Livewire\Dashboard::class)->name('dashboard');
+    Route::get('/', App\Livewire\Cms\Dashboard::class)->name('dashboard');
 
     // Admin Permohonan
     Route::get('/admin-permohonan', App\Livewire\Cms\Admin\Permohonan::class)->name('admin.permohonan');

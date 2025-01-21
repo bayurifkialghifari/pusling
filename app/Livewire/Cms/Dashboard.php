@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Cms;
 
 use Livewire\Component;
 
@@ -8,6 +8,7 @@ class Dashboard extends Component
 {
     public $title = 'Dashboard';
     public $view;
+    public $currentDate;
 
     public function mount() {
         // Check role name
@@ -25,10 +26,27 @@ class Dashboard extends Component
                 $this->view = 'default';
                 break;
         }
+
+        $this->currentDate = now();
     }
 
     public function render()
     {
-        return view('livewire.dashboard')->title($this->title);
+        return view('livewire.cms.dashboard')->title($this->title);
+    }
+
+    public function nextMonth() {
+        $this->currentDate = $this->currentDate->addMonth();
+        $this->dispatch('goToNextMonth');
+    }
+
+    public function prevMonth() {
+        $this->currentDate = $this->currentDate->subMonth();
+        $this->dispatch('goToPreviousMonth');
+    }
+
+    public function today() {
+        $this->currentDate = now();
+        $this->dispatch('goToCurrentMonth');
     }
 }
