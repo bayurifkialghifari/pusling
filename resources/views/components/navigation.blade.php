@@ -1,8 +1,16 @@
 <nav id="sidebar" class="sidebar js-sidebar">
     <div class="sidebar-content js-simplebar">
-        <a class="sidebar-brand" href="{{ route('cms.dashboard') }}">
-            <span class="align-middle">{{ $settings->name }}</span>
-        </a>
+        @if($settings->getFirstMedia('logo'))
+            <a href="{{ route('dashboard') }}" class="sidebar-brand">
+                <span class="align-middle">
+                    <img src="{{ $settings->getFirstMedia('logo')->getUrl() }}" alt="{{ $settings->name }}" class="img-fluid" width="100px">
+                </span>
+            </a>
+        @else
+            <a class="sidebar-brand" href="{{ route('cms.dashboard') }}">
+                <span class="align-middle">{{ $settings->name }}</span>
+            </a>
+        @endif
 
         <ul class="sidebar-nav">
             @foreach($menus as $menu)
