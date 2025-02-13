@@ -26,6 +26,8 @@ class RoleSeeder extends Seeder
         "password.confirm",
         "password.update",
         "logout",
+    ];
+    public $adminExcept = [
         "cms.user.permohonan",
         "cms.user.inbox",
         "cms.petugas.jadwal",
@@ -63,9 +65,6 @@ class RoleSeeder extends Seeder
                     $permission = $type . "." . $route;
                     $permission = Permission::findOrCreate($permission, "web");
 
-                    // Give admin permission
-                    $admin->givePermissionTo($permission);
-
                     // Give default permission
                     if (in_array($route, $this->routeDefault)) {
                         $default->givePermissionTo($permission);
@@ -79,6 +78,11 @@ class RoleSeeder extends Seeder
                     // Give user permission
                     if (in_array($route, $this->routeUser)) {
                         $user->givePermissionTo($permission);
+                    }
+
+                    // Give admin permission
+                    if(!in_array($route, $this->adminExcept)) {
+                        $admin->givePermissionTo($permission);
                     }
                 }
             }
